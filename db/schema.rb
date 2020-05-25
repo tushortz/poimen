@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_24_140847) do
+ActiveRecord::Schema.define(version: 2020_05_25_012446) do
+
+  create_table "shepherds", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name"
@@ -19,6 +26,9 @@ ActiveRecord::Schema.define(version: 2020_05_24_140847) do
     t.date "date_of_birth"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "shepherd_id"
+    t.index ["shepherd_id"], name: "index_users_on_shepherd_id"
   end
 
+  add_foreign_key "users", "shepherds"
 end

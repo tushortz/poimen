@@ -2,7 +2,7 @@
 
 require 'administrate/base_dashboard'
 
-class UserDashboard < Administrate::BaseDashboard
+class ShepherdDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -13,8 +13,6 @@ class UserDashboard < Administrate::BaseDashboard
     id: Field::Number,
     first_name: Field::String,
     last_name: Field::String,
-    mobile_no: Field::String,
-    date_of_birth: Field::Date,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -28,7 +26,6 @@ class UserDashboard < Administrate::BaseDashboard
     id
     first_name
     last_name
-    mobile_no
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -37,8 +34,6 @@ class UserDashboard < Administrate::BaseDashboard
     id
     first_name
     last_name
-    mobile_no
-    date_of_birth
     created_at
     updated_at
   ].freeze
@@ -49,8 +44,6 @@ class UserDashboard < Administrate::BaseDashboard
   FORM_ATTRIBUTES = %i[
     first_name
     last_name
-    mobile_no
-    date_of_birth
   ].freeze
 
   # COLLECTION_FILTERS

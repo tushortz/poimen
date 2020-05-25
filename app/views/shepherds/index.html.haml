@@ -1,0 +1,23 @@
+%h1 Listing shepherds
+
+%table
+  %thead
+    %tr
+      %th First name
+      %th Last name
+      %th
+      %th
+      %th
+
+  %tbody
+    - @shepherds.each do |shepherd|
+      %tr
+        %td= shepherd.first_name
+        %td= shepherd.last_name
+        %td= link_to 'Show', shepherd
+        %td= link_to 'Edit', edit_shepherd_path(shepherd)
+        %td= link_to 'Destroy', shepherd, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Shepherd', new_shepherd_path

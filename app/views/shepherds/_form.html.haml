@@ -1,0 +1,16 @@
+= form_for @shepherd do |f|
+  - if @shepherd.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@shepherd.errors.count, "error")} prohibited this shepherd from being saved:"
+      %ul
+        - @shepherd.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :first_name
+    = f.text_field :first_name
+  .field
+    = f.label :last_name
+    = f.text_field :last_name
+  .actions
+    = f.submit 'Save'
