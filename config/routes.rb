@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
     root to: "users#index"
   end
-  root to: "home#index"
+  root to: "admin/users#index"
   resources :users
   resources :shepherds
 

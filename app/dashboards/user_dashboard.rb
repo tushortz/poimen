@@ -15,6 +15,7 @@ class UserDashboard < Administrate::BaseDashboard
     last_name: Field::String,
     mobile_no: Field::String,
     date_of_birth: Field::Date,
+    shepherd: Field::BelongsTo,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -33,15 +34,7 @@ class UserDashboard < Administrate::BaseDashboard
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = %i[
-    id
-    first_name
-    last_name
-    mobile_no
-    date_of_birth
-    created_at
-    updated_at
-  ].freeze
+  SHOW_PAGE_ATTRIBUTES = ATTRIBUTE_TYPES.keys
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
@@ -51,6 +44,7 @@ class UserDashboard < Administrate::BaseDashboard
     last_name
     mobile_no
     date_of_birth
+    shepherd
   ].freeze
 
   # COLLECTION_FILTERS
@@ -60,15 +54,15 @@ class UserDashboard < Administrate::BaseDashboard
   # For example to add an option to search for open resources by typing "open:"
   # in the search field:
   #
-  #   COLLECTION_FILTERS = {
-  #     open: ->(resources) { resources.where(open: true) }
-  #   }.freeze
+    COLLECTION_FILTERS = {
+      shepherd: ->(resources) { resources.where(first_name: search_term) }
+    }.freeze
   COLLECTION_FILTERS = {}.freeze
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
   #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+  def display_resource(user)
+    "#{user.first_name} #{user.last_name}".strip
+  end
 end
