@@ -54,9 +54,6 @@ class UserDashboard < Administrate::BaseDashboard
   # For example to add an option to search for open resources by typing "open:"
   # in the search field:
   #
-    COLLECTION_FILTERS = {
-      shepherd: ->(resources) { resources.where(first_name: search_term) }
-    }.freeze
   COLLECTION_FILTERS = {}.freeze
 
   # Overwrite this method to customize how users are displayed
