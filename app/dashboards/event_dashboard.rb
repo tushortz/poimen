@@ -11,6 +11,7 @@ class EventDashboard < Administrate::BaseDashboard
     id: Field::Number,
     date: Field::Date,
     title: Field::String,
+    attendances: Field::HasMany,
     attendance: Field::Number,
     first_timers: Field::Number,
     youtube: Field::Number,
@@ -45,6 +46,7 @@ class EventDashboard < Administrate::BaseDashboard
   youtube
   facebook
   physical_church
+  attendances
   ].freeze
 
   # FORM_ATTRIBUTES

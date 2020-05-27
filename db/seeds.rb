@@ -3,5 +3,5 @@
 #
 # Examples:
 #
-viewed_froms = ['YouTube', 'Facebook', 'Physical Church']
-viewed_froms.each { |text| ViewedFrom.create([{ text: text }
+viewed_froms = ['YouTube', 'Facebook', 'Physical Church', 'Zoom', 'On a phone call']
+viewed_froms.each { |text| ViewedFrom.create({ text: text }) }

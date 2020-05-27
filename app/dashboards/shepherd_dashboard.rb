@@ -14,7 +14,7 @@ class ShepherdDashboard < Administrate::BaseDashboard
     first_name: Field::String,
     last_name: Field::String,
     users: Field::HasMany,
-    test: Field::Number,
+    sheep: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -27,6 +27,7 @@ class ShepherdDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
     first_name
     last_name
+    sheep
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

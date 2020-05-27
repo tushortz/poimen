@@ -16,19 +16,20 @@ ActiveRecord::Schema.define(version: 2020_05_27_093307) do
     t.string "full_name"
     t.integer "viewed_from_id", null: false
     t.integer "shepherd_id", null: false
+    t.integer "total_attendance", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "is_first_timer", default: false, null: false
-    t.integer "event_id"
-    t.index "\"event\", \"full_name\"", name: "index_attendances_on_event_and_full_name", unique: true
+    t.integer "event_id", null: false
+    t.index "\"event\", \"full_name\"", name: "index_attendances_on_event_and_full_name"
     t.index ["event_id"], name: "index_attendances_on_event_id"
     t.index ["shepherd_id"], name: "index_attendances_on_shepherd_id"
     t.index ["viewed_from_id"], name: "index_attendances_on_viewed_from_id"
   end
 
   create_table "events", force: :cascade do |t|
-    t.date "date"
     t.string "title"
+    t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
