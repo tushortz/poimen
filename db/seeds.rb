@@ -3,5 +3,5 @@
 #
 # Examples:
 #
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+viewed_froms = ['YouTube', 'Facebook', 'Physical Church']
+viewed_froms.each { |text| ViewedFrom.create([{ text: text }

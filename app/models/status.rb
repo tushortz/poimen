@@ -5,4 +5,5 @@ class Status < ApplicationRecord
   belongs_to :attendance
 
   default_scope { order(:text) }
+
 end

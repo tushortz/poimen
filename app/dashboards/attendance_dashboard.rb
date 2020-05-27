@@ -1,8 +1,6 @@
-# frozen_string_literal: true
+require "administrate/base_dashboard"
 
-require 'administrate/base_dashboard'
-
-class ShepherdDashboard < Administrate::BaseDashboard
+class AttendanceDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -11,12 +9,13 @@ class ShepherdDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    first_name: Field::String,
-    last_name: Field::String,
-    users: Field::HasMany,
-    test: Field::Number,
+    event: Field::BelongsTo,
+    full_name: Field::String,
+    viewed_from: Field::BelongsTo,
+    shepherd: Field::BelongsTo,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
+    is_first_timer: Field::Boolean,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -25,20 +24,31 @@ class ShepherdDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-    first_name
-    last_name
+  id
+  event
+  full_name
+  viewed_from
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
-  SHOW_PAGE_ATTRIBUTES = ATTRIBUTE_TYPES.keys
+  SHOW_PAGE_ATTRIBUTES = %i[
+  event
+  full_name
+  viewed_from
+  shepherd
+  is_first_timer
+  ].freeze
 
   # FORM_ATTRIBUTES
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    first_name
-    last_name
+    event
+    full_name
+    viewed_from
+    shepherd
+    is_first_timer
   ].freeze
 
   # COLLECTION_FILTERS
@@ -53,10 +63,10 @@ class ShepherdDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how users are displayed
+  # Overwrite this method to customize how attendances are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(shepherd)
-    "#{shepherd.first_name} #{shepherd.last_name}".strip
+  def display_resource(attendance)
+    "#{attendance.event.date.strftime('%b %d, %Y')} - #{attendance.full_name}"
   end
 end

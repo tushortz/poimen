@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Date:
+  = @attendance.date
+%p
+  %b Full name:
+  = @attendance.full_name
+%p
+  %b Status:
+  = @attendance.status
+%p
+  %b Viewed from:
+  = @attendance.viewed_from
+%p
+  %b Shepherd:
+  = @attendance.shepherd
+
+= link_to 'Edit', edit_attendance_path(@attendance)
+\|
+= link_to 'Back', attendances_path

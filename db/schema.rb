@@ -10,11 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_25_012446) do
+ActiveRecord::Schema.define(version: 2020_05_27_093307) do
+
+  create_table "attendances", force: :cascade do |t|
+    t.string "full_name"
+    t.integer "viewed_from_id", null: false
+    t.integer "shepherd_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_first_timer", default: false, null: false
+    t.integer "event_id"
+    t.index "\"event\", \"full_name\"", name: "index_attendances_on_event_and_full_name", unique: true
+    t.index ["event_id"], name: "index_attendances_on_event_id"
+    t.index ["shepherd_id"], name: "index_attendances_on_shepherd_id"
+    t.index ["viewed_from_id"], name: "index_attendances_on_viewed_from_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.date "date"
+    t.string "title"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "shepherds", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.string "text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -30,5 +57,14 @@ ActiveRecord::Schema.define(version: 2020_05_25_012446) do
     t.index ["shepherd_id"], name: "index_users_on_shepherd_id"
   end
 
+  create_table "viewed_froms", force: :cascade do |t|
+    t.string "text"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "attendances", "events"
+  add_foreign_key "attendances", "shepherds"
+  add_foreign_key "attendances", "viewed_froms"
   add_foreign_key "users", "shepherds"
 end
