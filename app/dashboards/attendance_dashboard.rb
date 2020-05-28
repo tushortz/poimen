@@ -24,10 +24,11 @@ class AttendanceDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-  id
   event
   full_name
   viewed_from
+  shepherd
+  is_first_timer
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES

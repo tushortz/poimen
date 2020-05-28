@@ -1,13 +1,28 @@
 class Event < ApplicationRecord
   default_scope { order('date DESC') }
-  scope :attendance, -> { attendances.count }
-  scope :first_timers, -> { attendances.where(is_first_timer: true).count }
-  scope :youtube, -> { attendances.where(viewed_from: 1).count }
-  scope :facebook, -> { attendances.where(viewed_from: 2).count }
-  scope :physical_church, -> { attendances.where(viewed_from: 3).count }
 
-  has_many :attendances
+  has_many :attendances, dependent: :destroy
 
   validates :date, presence: true
   validates :title, presence: true
+
+  def attendance
+    attendances.count
+  end
+
+  def first_timers
+    attendances.where(is_first_timer: true).count
+  end
+
+  def youtube
+    attendances.where(viewed_from: 1).count
+  end
+
+  def facebook
+    attendances.where(viewed_from: 2).count
+  end
+
+  def physical_church
+    attendances.where(viewed_from: 3).count
+  end
 end
