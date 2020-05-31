@@ -15,7 +15,10 @@ class UserDashboard < Administrate::BaseDashboard
     last_name: Field::String,
     mobile_no: Field::String,
     date_of_birth: Field::Date,
-    shepherd: Field::BelongsTo,
+    shepherd: Field::BelongsTo.with_options(
+      searchable: true,
+      searchable_field: 'last_name',
+    ),
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
@@ -29,6 +32,7 @@ class UserDashboard < Administrate::BaseDashboard
     first_name
     last_name
     mobile_no
+    shepherd
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -53,7 +57,9 @@ class UserDashboard < Administrate::BaseDashboard
   # For example to add an option to search for open resources by typing "open:"
   # in the search field:
   #
-  COLLECTION_FILTERS = {}.freeze
+  COLLECTION_FILTERS = {
+    # shepherd: ->(resources) { resources.where(shepherd: 1) }
+  }.freeze
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.

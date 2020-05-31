@@ -34,11 +34,11 @@ class AttendanceDashboard < Administrate::BaseDashboard
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-  event
-  full_name
-  viewed_from
-  shepherd
-  is_first_timer
+    event
+    full_name
+    viewed_from
+    shepherd
+    is_first_timer
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -62,7 +62,9 @@ class AttendanceDashboard < Administrate::BaseDashboard
   #   COLLECTION_FILTERS = {
   #     open: ->(resources) { resources.where(open: true) }
   #   }.freeze
-  COLLECTION_FILTERS = {}.freeze
+  COLLECTION_FILTERS = {
+    first_timer: ->(resources) { resources.where(is_first_timer: true) },
+  }.freeze
 
   # Overwrite this method to customize how attendances are displayed
   # across all pages of the admin dashboard.

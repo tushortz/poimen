@@ -11,7 +11,10 @@ class EventDashboard < Administrate::BaseDashboard
     id: Field::Number,
     date: Field::Date,
     title: Field::String,
-    attendances: Field::HasMany,
+    attendances: Field::HasMany
+      .with_options(scope: lambda {
+        Event.includes(:attendances).limit(10)
+      }),
     attendance: Field::Number,
     first_timers: Field::Number,
     youtube: Field::Number,
@@ -27,26 +30,26 @@ class EventDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-  date
-  title
-  attendance
-  first_timers
-  youtube
-  facebook
-  physical_church
+    date
+    title
+    attendance
+    first_timers
+    youtube
+    facebook
+    physical_church
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-  date
-  title
-  attendance
-  first_timers
-  youtube
-  facebook
-  physical_church
-  attendances
+    date
+    title
+    attendance
+    first_timers
+    youtube
+    facebook
+    physical_church
+    attendances
   ].freeze
 
   # FORM_ATTRIBUTES
